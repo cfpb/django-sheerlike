@@ -1,6 +1,6 @@
 # django-sheerlike
 
-This is an attempt to port some of our favorite [sheer](git@github.com:cfpb/sheer.git) features over to Django.
+This is an attempt to port some of our favorite [sheer](https://github.com/cfpb/sheer) features over to Django.
 
 **Current status**: Not usable for any purpose.
 **Runs on**: Django 1.8 and Python 2.7
