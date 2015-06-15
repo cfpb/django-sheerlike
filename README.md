@@ -2,9 +2,8 @@
 
 This is an attempt to port some of our favorite [sheer](git@github.com:cfpb/sheer.git) features over to Django.
 
-Other things to include:
-
-**Technology stack**: Django 1.8 and Python 2.7
+**Current status**: Not usable for any purpose.
+**Runs on**: Django 1.8 and Python 2.7
 
 ----
 
