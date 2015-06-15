@@ -14,7 +14,7 @@ The biggest change is that the bundle of files that we were calling a "sheer sit
 
 As stated in [Two Scoops of Django 1.8](http://twoscoopspress.org/products/two-scoops-of-django-1-8):
 
-  "each app should be tightly focused on its task. If an app can’t be explained in a single sentence of moderate length, or you need to say ‘and’ more than once, it probably means the app is too big and should be broken up."
+_"each app should be tightly focused on its task. If an app can’t be explained in a single sentence of moderate length, or you need to say ‘and’ more than once, it probably means the app is too big and should be broken up."_
   
 Sheer's URL routing goes away entirely. If a particular URL renders a particular template, it's because it was specified in a Django view. If a template presumes the existence of a "post" item on blog post detail, that object will have to be created in the Django view, and passed into the template context. This is pretty simple, though:
 
