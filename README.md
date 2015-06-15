@@ -1,6 +1,6 @@
 # django-sheerlike
 
-**Description**:  This is an attempt to port some of our favorite sheer features over to Django.
+This is an attempt to port some of our favorite [sheer](git@github.com:cfpb/sheer.git) features over to Django.
 
 Other things to include:
 
