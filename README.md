@@ -6,7 +6,7 @@ This is an attempt to port some of our favorite [sheer](https://github.com/cfpb/
 
 **Runs on**: Django 1.8 and Python 2.7
 
-# Philosphy
+# Philosophy
 
 It's our goal to respect the work that people have put into building sites for Sheer, but also avoid coloring too far outside the lines of how Django works.
 
