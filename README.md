@@ -50,10 +50,11 @@ Eliminate relative template includes/imports. for example, in (cfgov-refresh) bl
 
 becomes `{% import "blog/_vars-blog.html" as vars with context %}`
 
-If you are referencing any context variables (like the 'request' object) in 'imported' templates, be sure to specify 'with context'
+The request object is a context variable now, so in order to reference it in 'imported' templates, [you must specify 'with context'](http://jinja.pocoo.org/docs/dev/templates/#import-context-behavior).
 
 For example, `{% from "macros.html" import share as share %}` becomes `{% from "macros.html" import share as share with context%}`
 
+Also, the [Django request object](https://docs.djangoproject.com/en/1.8/ref/request-response/#httprequest-objects) has different properties and methods than the one available in Flask/sheer.
 
 We'll probably find a few more things, so this list will grow.
 
