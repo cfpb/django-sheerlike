@@ -52,6 +52,10 @@ becomes `{% import "blog/_vars-blog.html" as vars with context %}`
 
 We'll probably find a few more things, so this list will grow.
 
+## API's and RSS Feeds
+
+We will need to switch to native Django tools for such things.
+
 ----
 
 ## Open source licensing info
