@@ -50,6 +50,11 @@ Eliminate relative template includes/imports. for example, in (cfgov-refresh) bl
 
 becomes `{% import "blog/_vars-blog.html" as vars with context %}`
 
+If you are referencing any context variables (like the 'request' object) in 'imported' templates, be sure to specify 'with context'
+
+For example, `{% from "macros.html" import share as share %}` becomes `{% from "macros.html" import share as share with context%}`
+
+
 We'll probably find a few more things, so this list will grow.
 
 ## API's and RSS Feeds
