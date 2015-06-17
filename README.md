@@ -10,7 +10,7 @@ This is an attempt to port some of our favorite [sheer](https://github.com/cfpb/
 
 It's our goal to respect the work that people have put into building sites for Sheer, but also avoid coloring too far outside the lines of how Django works.
 
-# What does migration look like?
+# Required changes
 
 The biggest change is that the bundle of files that we were calling a "sheer site", is now best thought of as a set of templates for apps that should be defined in the proper Django form. [cfgov-refresh](https://github.com/cfpb/cfgov-refresh) describes many "apps" (blog, newsroom, activity feed, etc), while [Owning a Home](https://github.com/cfpb/owning-a-home/) probably only describes one.
 
@@ -61,6 +61,11 @@ We'll probably find a few more things, so this list will grow.
 ## API's and RSS Feeds
 
 We will need to switch to native Django tools for such things.
+
+# Recommendations
+
+- Look for opportunities to replace complicated template logic with python views
+- Switch to [Django Pagination](https://docs.djangoproject.com/en/1.8/topics/pagination/)
 
 ----
 
