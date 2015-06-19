@@ -30,19 +30,6 @@ Almost all of the rest of the sheer machinery is still intact, though: you still
 
 ## Template tweaks
 
-Replace references to 'some_result.permalink' to use [Django's URL reversing system](https://docs.djangoproject.com/en/1.8/ref/urlresolvers/#django.core.urlresolvers.reverse).
-
-this:
-```
-                 <a class="list_link"
-                   href="{{ pop_post.permalink }}">
-```
-
-becomes:
-```
-                 <a class="list_link"
-                   href="{{ url('blog_detail', kwargs={'slug':pop_post._id})  }}">
-```
 
 Eliminate relative template includes/imports. for example, in (cfgov-refresh) blog/index.html:
 
