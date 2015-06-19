@@ -8,6 +8,7 @@ from collections import namedtuple
 import django.utils.datastructures
 from django.conf import settings
 from django.utils.http import urlencode
+from django.core.urlresolvers import reverse
 
 import dateutil.parser
 
@@ -96,7 +97,13 @@ class QueryHit(object):
 
     @property
     def permalink(self):
-        raise NotImplementedError("Please use django's reverse url system")
+        import sheerlike
+        if self.type in sheerlike.PERMALINK_REGISTRY:
+            pattern_name = sheerlike.PERMALINK_REGISTRY[self.type]
+            return reverse(pattern_name,kwargs=dict(doc_id=self._id))
+        else:
+            raise NotImplementedError("Please use django's reverse url system,"
+                                       "or register a permalink for %s" % self.type)
 
     def __getattr__(self, attrname):
         value = field_or_source_value(attrname, self.hit_dict)

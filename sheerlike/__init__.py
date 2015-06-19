@@ -5,12 +5,17 @@ import functools
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 
-from jinja2 import Environment
+from jinja2 import Environment, StrictUndefined
 
 from .query import QueryFinder, more_like_this, get_document
 from .filters import selected_filters_for_field, is_filter_selected
 from .templates import date_formatter
 from .middleware import get_request
+
+PERMALINK_REGISTRY={}
+
+def register_permalink(sheer_type, url_pattern_name):
+    PERMALINK_REGISTRY[sheer_type]=url_pattern_name
 
 def url_for(app, filename):
     if app == 'static':
