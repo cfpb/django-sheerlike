@@ -5,7 +5,7 @@ import functools
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 
-from jinja2 import Environment, StrictUndefined
+from jinja2 import Environment
 
 from .query import QueryFinder, more_like_this, get_document
 from .filters import selected_filters_for_field, is_filter_selected
@@ -29,6 +29,9 @@ def date_filter(value, format="%Y-%m-%d"):
 
 def environment(**options):
     queryfinder = QueryFinder()
+
+    # Django defaults to DebugUndefined
+    # options['undefined'] = make_logging_undefined()
 
     env = Environment(**options)
     env.globals.update({
