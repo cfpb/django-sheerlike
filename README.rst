@@ -92,7 +92,18 @@ Old:
     {% endmacro %}
 
 New:
-``{% macro format_phone(number) %}     {%- for char in number -%}         {{- '(' if loop.index == 1 else '' -}}         {{ char }}         {{- ') ' if loop.index == 3 else '' -}}         {{- '-' if loop.index == 6 else '' -}}     {%- endfor %} {% endmacro %}``
+
+::
+
+    {% macro format_phone(number) %}
+        {%- for char in number -%}
+            {{- '(' if loop.index == 1 else '' -}}
+            {{ char }}
+            {{- ') ' if loop.index == 3 else '' -}}
+            {{- '-' if loop.index == 6 else '' -}}
+        {%- endfor %}
+    {% endmacro %}
+`
 
 API's and RSS Feeds
 -------------------
