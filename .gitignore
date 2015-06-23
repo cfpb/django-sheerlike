@@ -7,6 +7,7 @@
 *.o
 *.so
 _site/
+_build/
 
 # Packages #
 ############
@@ -20,7 +21,6 @@ _site/
 *.rar
 *.tar
 *.zip
-
 # Logs and databases #
 ######################
 *.log
@@ -48,6 +48,7 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 .env
+.eggs/
 
 # Django #
 #################
