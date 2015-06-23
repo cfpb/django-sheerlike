@@ -215,7 +215,7 @@ class Query(object):
         # Add in filters from the template.
         new_multidict = request.GET.copy()
         for key, value in filter_args.items():
-            new_multidict.add(key, value)
+            new_multidict.update({key: value})
         url_filters = filter_dsl_from_multidict(new_multidict)
         args_flat = request.GET.copy()
         query_body = {}
