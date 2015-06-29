@@ -5,7 +5,7 @@ import json
 
 from collections import namedtuple
 
-import django.utils.datastructures
+from django.utils.datastructures import MultiValueDict as MultiDict
 from django.conf import settings
 from django.utils.http import urlencode
 from django.core.urlresolvers import reverse
@@ -167,7 +167,7 @@ class QueryResults(object):
     def url_for_page(self, pagenum):
         request = get_request()
         current_args = request.GET
-        args_dict = django.utils.datastructures.MultiValueDict(current_args)
+        args_dict = MultiDict(current_args)
         if pagenum != 1:
             args_dict['page'] = pagenum
         elif 'page' in args_dict:
@@ -192,7 +192,7 @@ class Query(object):
         self.__results = None
         self.json_safe = json_safe
 
-    def search_with_url_arguments(self, aggregations=None, **kwargs):
+    def search(self, aggregations=None, use_url_arguments=True, size=10, **kwargs):
         query_file = json.loads(file(self.filename).read())
         query_dict = query_file['query']
 
@@ -213,10 +213,16 @@ class Query(object):
 
         request = get_request()
         # Add in filters from the template.
-        new_multidict = request.GET.copy()
+        new_multidict = MultiDict()
+        # First add the url arguments if requested
+        if use_url_arguments:
+            new_multidict = request.GET.copy()
+        # Next add the arguments from the search() function used in the
+        # template
         for key, value in filter_args.items():
-            new_multidict.update({key: value})
-        url_filters = filter_dsl_from_multidict(new_multidict)
+            new_multidict.add(key, value)
+
+        filters = filter_dsl_from_multidict(new_multidict)
         args_flat = request.GET.copy()
         query_body = {}
 
@@ -238,9 +244,9 @@ class Query(object):
                 [(k, v) for k, v in args_flat.items() if v])
             query_dict.update(args_flat_filtered)
             query_body['query'] = {'filtered': {'filter': {}}}
-            if url_filters:
+            if filters:
                 query_body['query']['filtered']['filter'][
-                    'and'] = [f for f in url_filters]
+                    'and'] = [f for f in filters]
 
             if 'filters' in query_file:
                 if 'and' not in query_body['query']['filtered']['filter']:
@@ -257,16 +263,8 @@ class Query(object):
         return QueryResults(self,response, pagenum)
 
     def possible_values_for(self, field, **kwargs):
-        results = self.search_with_url_arguments(aggregations=[field], **kwargs)
+        results = self.search(aggregations=[field], **kwargs)
         return results.aggregations(field)
-
-    def search(self):
-        query_file = json.loads(file(self.filename).read())
-        query_dict = query_file['query']
-
-        response = self.es.search(index=es_index, body=query_dict)
-
-        return QueryResults(self,response)
 
 
 
