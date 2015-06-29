@@ -17,6 +17,7 @@ def generate_term_filters(multidict, filter_keys):
         field = key.replace('filter_', '')
         filter_type_main = {"or": []}
         values = multidict.getlist(key)
+        #from nose.tools import set_trace; set_trace();
         for val in values:
             term_single = {"term": {}}
             term_single["term"][field] = val
@@ -40,7 +41,10 @@ def generate_range_filters(multidict, filter_keys):
             range_clause["range"][field] = {}
         # If there are multiples of the same date filter, this will take
         # the first
-        value = multidict.getlist(key)[0]
+        
+        # The django version of MultiDict returns the actual object
+        # if there is only one, and a list otherwise
+        value = multidict.get(key)
         range_clause["range"][field][operator] = value
 
     # Validate date range input
