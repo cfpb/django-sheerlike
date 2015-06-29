@@ -1,6 +1,9 @@
 django-sheerlike
 ================
 
+.. image:: https://travis-ci.org/cfpb/django-sheerlike.svg
+    :target: https://travis-ci.org/cfpb/django-sheerlike
+
 This is an attempt to port some of our favorite
 `sheer <https://github.com/cfpb/sheer>`__ features over to Django.
 
