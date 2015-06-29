@@ -110,6 +110,24 @@ API's and RSS Feeds
 
 We will need to switch to native Django tools for such things.
 
+See it in action
+================
+
+Want to test this out?
+
+These instructions assume you have a local elasticsearch server, already populated by 'sheer index' as documented in the `cfgov-refresh readme <https://github.com/cfpb/cfgov-refresh/blob/flapjack/README.md>`__.
+
+-  Check out `cfgov-django <https://github.com/rosskarchner/cfgov-django>`__ alongside cfgov-refresh. 
+-  create a new virtualenv and pip install -r requirements.txt
+-  cd into the 'cfgov' directory, and run './manage.py runserver'
+
+You should then be able to see the site running on http://localhost:8000
+
+Run the tests
+=============
+
+Install `tox <https://tox.readthedocs.org/en/latest/>`__ and run the 'tox' command from a checkout of this repo.
+
 Recommendations
 ===============
 
@@ -123,8 +141,8 @@ Recommendations
 Open source licensing info
 --------------------------
 
-1. `TERMS <TERMS.md>`__
-2. LICENSE
+1. `TERMS <TERMS.rst>`__
+2. `LICENSE <LICENSE.rst>`__
 3. `CFPB Source Code
    Policy <https://github.com/cfpb/source-code-policy/>`__
 
