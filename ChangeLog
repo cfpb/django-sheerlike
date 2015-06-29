@@ -1,0 +1,60 @@
+CHANGES
+=======
+
+* request.GET.copy(
+* Up to date with @kwall's latest changes to sheer.query
+* added jinja2 to the requirements
+* add elasticsearch depenedency
+* remove unneeded import, and fix reference to README in setup.cfg
+* trying to get autodoc working
+* moved doc stub into docs folder
+* product of running sphinx-quickstart
+* Update README.rst
+* This is madness! This is Python!
+* Filtering doesn't work yet, but now it fails differently
+* Formatting fixes, and added information on SheerDetailView
+* Guidance re: .permalink is no longer accurate
+* - restores .permalink (using a registry mechanism) - provides a generic view which should suffice for most uses of sheer's "lookups" feature
+* fix typo ;)
+* initial commit
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Fix typo
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Update README.md
+* Removes trailing newlines
+* Update TERMS.md
+* Fixes #13 - adds INSTALL.md
+* Updating gitignore for more robust coverage
+* Fixes typo
+* Update README.md
+* Add front-endy things to ignore
+* Add open source checklist and to do item in README
+* Use official CC0 plain text legal code
+* Add suggested CHANGELOG format
+* Add language about CFPB contribs. to a joint work
+* https fix
+* https a URL on README
+* Fix typo in README
+* Update first sentence of TERMS
+* Copyedit README
+* Copyedit CONTRIBUTING
+* Fix typo in TERMS.md
+* Fix typos in README. Add simple gitignore
+* Update screenshot link to point to CFPB
+* Adjust screenshot size
+* Add screenshot to README
+* Add example screenshot
+* Add example screenshot
+* Update README and add CHANGELOG
+* Add TERMS and CONTRIBUTING
+* Initial commit
