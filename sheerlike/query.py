@@ -216,11 +216,11 @@ class Query(object):
         new_multidict = MultiDict()
         # First add the url arguments if requested
         if use_url_arguments:
-            new_multidict = request.GET.copy()
+            new_multidict = MultiDict(request.GET.copy())
         # Next add the arguments from the search() function used in the
         # template
         for key, value in filter_args.items():
-            new_multidict.add(key, value)
+            new_multidict.update({key: value})
 
         filters = filter_dsl_from_multidict(new_multidict)
         args_flat = request.GET.copy()
