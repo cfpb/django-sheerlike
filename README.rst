@@ -126,7 +126,7 @@ You should then be able to see the site running on http://localhost:8000
 Run the tests
 =============
 
-Install `tox <https://tox.readthedocs.org/en/latest/>` and run the 'tox' command from a checkout of this repo.
+Install `tox <https://tox.readthedocs.org/en/latest/>`__ and run the 'tox' command from a checkout of this repo.
 
 Recommendations
 ===============
