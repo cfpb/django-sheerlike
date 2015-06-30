@@ -5,6 +5,20 @@ from elasticsearch import TransportError
 
 from sheerlike.query import get_document 
 
+class SheerTemplateView(TemplateView):
+    def get_template_names(self,*args, **kwargs):
+        # if template_name is configured, just do that
+        if self.template_name is not None:
+            return [self.template_name]
+
+        # otherwise, try to infer a template name from
+        # the url
+        request = self.request
+        if request.path.endswith('/'):
+            return [(request.path[1:]+'index.html')]
+        else:
+            return [request.path[1:]]
+
 class SheerDetailView(TemplateView):
     doc_type = None
     local_name = 'object'

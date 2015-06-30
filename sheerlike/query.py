@@ -17,6 +17,8 @@ import datetime
 
 import elasticsearch
 
+from unipath import Path
+
 #from sheer.utility import find_in_search_path
 from .filters import filter_dsl_from_multidict
 
@@ -273,9 +275,10 @@ class QueryFinder(object):
     def __init__(self):
         self.es = elasticsearch.Elasticsearch(settings.SHEER_ELASTICSEARCH_SERVER)
         self.es_index = settings.SHEER_ELASTICSEARCH_INDEX
+        self.searchpath = [Path(site).child('_queries') for site in settings.SHEER_SITES]
 
     def __getattr__(self, name):
-        for dir in settings.SHEER_QUERIES_DIRS:
+        for dir in self.searchpath:
             query_filename = name + ".json"
             query_file_path = os.path.join(dir, query_filename)
 

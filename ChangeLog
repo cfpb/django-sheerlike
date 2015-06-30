@@ -1,7 +1,16 @@
 CHANGES
 =======
 
-* request.GET.copy(
+* One last markdown-to-ReStructuredText conversion
+* Update README.rst
+* Update README.rst
+* Update README.rst
+* Removed redundant changelog
+* Remove duplicate names from AUTHORS
+* Removed screenshot, added mailmap
+* The actual tests I meant to include in the last commit, plus some administrivia
+* Migrated some unit tests from Sheer, and configs for tox and Travis
+* request.GET.copy() doesn't get you a mutable object
 * Up to date with @kwall's latest changes to sheer.query
 * added jinja2 to the requirements
 * add elasticsearch depenedency

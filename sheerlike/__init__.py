@@ -4,8 +4,11 @@ import functools
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 from jinja2 import Environment
+
+from unipath import Path
 
 from .query import QueryFinder, more_like_this, get_document
 from .filters import selected_filters_for_field, is_filter_selected
@@ -30,8 +33,16 @@ def date_filter(value, format="%Y-%m-%d"):
 def environment(**options):
     queryfinder = QueryFinder()
 
-    # Django defaults to DebugUndefined
-    # options['undefined'] = make_logging_undefined()
+    searchpath =[]
+
+    sites = settings.SHEER_SITES
+    for site in sites:
+        site_path = Path(site)
+        searchpath.append(site_path)
+        searchpath.append(site_path.child('_includes'))
+        searchpath.append(site_path.child('_layouts'))
+
+    options['loader'].searchpath += searchpath
 
     env = Environment(**options)
     env.globals.update({
