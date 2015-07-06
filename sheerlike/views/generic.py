@@ -49,7 +49,7 @@ class SheerTemplateView(TemplateView):
             template = response.resolve_template(response.template_name)
         
         except TemplateDoesNotExist:
-            raise Http404("could not find template " + response.default_template)
+            raise Http404("could not find template in " + str(response.template_name))
 
         if template.template.name == self.default_template and self.local_name not in context:
             raise Http404('fell back to %s, but %s with id %s not found' %
