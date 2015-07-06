@@ -34,6 +34,7 @@ def environment(**options):
     queryfinder = QueryFinder()
 
     searchpath =[]
+    staticdirs = []
 
     sites = settings.SHEER_SITES
     for site in sites:
@@ -41,8 +42,10 @@ def environment(**options):
         searchpath.append(site_path)
         searchpath.append(site_path.child('_includes'))
         searchpath.append(site_path.child('_layouts'))
+        staticdirs.append(site_path.child('static'))
 
     options['loader'].searchpath += searchpath
+    settings.STATICFILES_DIRS = staticdirs
 
     env = Environment(**options)
     env.globals.update({
