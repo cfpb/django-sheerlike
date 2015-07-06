@@ -46,10 +46,10 @@ pretty simple:
 
 .. code:: python
 
-        url(r'^blog/(?P<doc_id>[\w-]+)/$', SheerDetailView.as_view(
+        url(r'^blog/(?P<doc_id>[\w-]+)/$', SheerTemplateView.as_view(
                                         doc_type='posts',
                                         local_name='post',
-                                        template_name='blog/_single.html',
+                                        default_template='blog/_single.html',
                                        ), name='blog_detail'),
 
 Almost all of the rest of the sheer machinery is still intact, though:
