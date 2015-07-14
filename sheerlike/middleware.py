@@ -1,5 +1,6 @@
 from threading import local
 from django.http import HttpResponse
+from django.core.urlresolvers import resolve
 
 _active = local()
 
@@ -25,4 +26,6 @@ class GlobalRequestMiddleware(object):
         request.headers = FlaskyHeaderGetter(request)
         request.url = "%s://%s%s" % (request.scheme, request.get_host(),
                 request.get_full_path())
+        request.url_rule = request.resolver_match
+        request.url_rule.endpoint = request.resolver_match.url_name
         return None

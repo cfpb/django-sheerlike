@@ -1,12 +1,17 @@
 from __future__ import absolute_import  # Python 2 only
 
+import os
+import os.path
 import functools
+import warnings
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from jinja2 import Environment
+import jinja2.runtime
+from jinja2.runtime import Context
 
 from unipath import Path
 
@@ -26,9 +31,35 @@ def url_for(app, filename):
     else:
         raise ValueError("url_for doesn't know about %s" % app)
 
-def date_filter(value, format="%Y-%m-%d"):
-        return date_formatter(value, format)
+def date_filter(value, format="%Y-%m-%d", tz="America/New_York"):
+            return date_formatter(value, format, tz)
 
+
+class SheerlikeContext(Context):
+    def __init__(self, environment, parent, name, blocks):
+        super(SheerlikeContext, self).__init__(environment, parent, name, blocks)
+        self.vars['request'] = get_request()
+
+# Monkey patch not needed in master version of Jinja2
+# https://github.com/mitsuhiko/jinja2/commit/f22fdd5ffe81aab743f78290071b0aa506705533
+jinja2.runtime.Context = SheerlikeContext
+
+class SheerlikeEnvironment(Environment):
+    def join_path(self, template, parent):
+        dirname = os.path.dirname(parent)
+        segments = dirname.split('/')
+        paths = []
+        collected = ''
+        for segment in segments:
+            collected += segment + '/'
+            paths.insert(0,collected[:])
+        for p in paths:
+            relativepath = os.path.join(p, template)
+            for search in self.loader.searchpath:
+                filesystem_path = os.path.join(search, relativepath)
+                if os.path.exists(filesystem_path):
+                    return relativepath
+        return template
 
 def environment(**options):
     queryfinder = QueryFinder()
@@ -47,7 +78,7 @@ def environment(**options):
     options['loader'].searchpath += searchpath
     settings.STATICFILES_DIRS = staticdirs
 
-    env = Environment(**options)
+    env = SheerlikeEnvironment(**options)
     env.globals.update({
         'static': staticfiles_storage.url,
         'url_for':url_for,
