@@ -59,24 +59,10 @@ functions like get\_document and more\_like\_this.
 Template tweaks
 ---------------
 
-Eliminate relative template includes/imports. for example, in
-(cfgov-refresh) blog/index.html:
-
-``{% import "_vars-blog.html" as vars with context %}``
-
-becomes ``{% import "blog/_vars-blog.html" as vars with context %}``
-
-The request object is a context variable now, so in order to reference
-it in 'imported' templates, `you must specify 'with
-context' <http://jinja.pocoo.org/docs/dev/templates/#import-context-behavior>`__.
-
-For example, ``{% from "macros.html" import share as share %}`` becomes
-``{% from "macros.html" import share as share with context%}``
-
-Also, the `Django request
+The `Django request
 object <https://docs.djangoproject.com/en/1.8/ref/request-response/#httprequest-objects>`__
 has different properties and methods than the one available in
-Flask/sheer.
+Flask/sheer. We've added some helpers to support existing access patterns, but those should be considered deprecated.
 
 Inline IF statements MUST have an else clause, `otherwise the output is
 undefined <http://jinja.pocoo.org/docs/dev/templates/#if-expression>`__
