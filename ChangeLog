@@ -1,6 +1,15 @@
 CHANGES
 =======
 
+* delete unneccesary print statement
+* add pytz
+* Update README.rst
+* fix date formatting filter, and implement relative template imports, and a global request object!
+* fixed logic for certain types of 404's
+* corrected README re: generic views
+* refactored to simplify and unify the generic views, and make the combined SheerTemplateView behave more like Sheer does
+* A new generic view that infers templates from the URL, some configuration simplification and DRY work, the beginning of a tool for populating a Django model from a Sheer template
+* Update README.rst
 * One last markdown-to-ReStructuredText conversion
 * Update README.rst
 * Update README.rst
