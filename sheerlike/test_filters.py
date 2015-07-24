@@ -13,8 +13,13 @@ class TestArgParsing(object):
 
     def test_args_to_filter_dsl(self):
         filter_dsl = filters.filter_dsl_from_multidict(self.args)
-        # the existing tests here seemed to depend of the other
-        # of dictionary keys, which is undefined
+        print filter_dsl
+        assert('and' in filter_dsl[0])
+        assert('or' in filter_dsl[0]['and'][0])
+        print filter_dsl[0]['and']
+        assert('cats' == filter_dsl[0]['and'][0]['or'][0]['term']['category'])
+        assert('dogs' == filter_dsl[0]['and'][0]['or'][1]['term']['category'])
+        assert('earth' in filter_dsl[0]['and'][1]['or'][0]['term']['planet'])
 
     def test_range_args(self):
         filter_dsl = filters.filter_dsl_from_multidict(self.args)

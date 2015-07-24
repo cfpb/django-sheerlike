@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* Add some tests from sheer to sheerlike
+* git ignore fix via @kurtw
 * delete unneccesary print statement
 * add pytz
 * Update README.rst
