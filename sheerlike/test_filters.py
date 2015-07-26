@@ -13,13 +13,15 @@ class TestArgParsing(object):
 
     def test_args_to_filter_dsl(self):
         filter_dsl = filters.filter_dsl_from_multidict(self.args)
-        print filter_dsl
         assert('and' in filter_dsl[0])
         assert('or' in filter_dsl[0]['and'][0])
-        print filter_dsl[0]['and']
-        assert('cats' == filter_dsl[0]['and'][0]['or'][0]['term']['category'])
-        assert('dogs' == filter_dsl[0]['and'][0]['or'][1]['term']['category'])
-        assert('earth' in filter_dsl[0]['and'][1]['or'][0]['term']['planet'])
+        filter_dict = filter_dsl[0]['and']
+        for i in range(2):
+            if filter_dsl[0]['and'][i]['or'][0]['term'].get('category'):
+                assert('cats' in filter_dict[i]['or'][0]['term']['category'])
+                assert('dogs' in filter_dict[i]['or'][1]['term']['category'])
+            else:
+                assert('earth' in filter_dict[i]['or'][0]['term']['planet'])
 
     def test_range_args(self):
         filter_dsl = filters.filter_dsl_from_multidict(self.args)

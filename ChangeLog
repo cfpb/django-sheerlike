@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Fix random test pass/fail result
 * Add some tests from sheer to sheerlike
 * git ignore fix via @kurtw
 * delete unneccesary print statement
