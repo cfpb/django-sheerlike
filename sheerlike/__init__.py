@@ -15,7 +15,7 @@ from jinja2.runtime import Context
 
 from unipath import Path
 
-from .query import QueryFinder, more_like_this, get_document
+from .query import QueryFinder, more_like_this, get_document, when
 from .filters import selected_filters_for_field, is_filter_selected
 from .templates import date_formatter
 from .middleware import get_request
@@ -81,15 +81,16 @@ def environment(**options):
     env = SheerlikeEnvironment(**options)
     env.globals.update({
         'static': staticfiles_storage.url,
-        'url_for':url_for,
+        'url_for': url_for,
         'url': reverse,
         'queries': queryfinder,
         'more_like_this': more_like_this,
         'get_document': get_document,
         'selected_filters_for_field': selected_filters_for_field,
         'is_filter_selected': is_filter_selected,
+        'when': when
     })
     env.filters.update({
-        'date':date_filter
+        'date': date_filter
     })
     return env
