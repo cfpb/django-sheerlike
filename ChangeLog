@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* Add jinja2 extension 'do'
 * Add dynamic RSS feeds
 * Fix random test pass/fail result
 * Add some tests from sheer to sheerlike

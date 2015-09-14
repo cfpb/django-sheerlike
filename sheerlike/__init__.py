@@ -78,6 +78,8 @@ def environment(**options):
     options['loader'].searchpath += searchpath
     settings.STATICFILES_DIRS = staticdirs
 
+    options.setdefault('extensions', []).append('jinja2.ext.do')
+
     env = SheerlikeEnvironment(**options)
     env.globals.update({
         'static': staticfiles_storage.url,
