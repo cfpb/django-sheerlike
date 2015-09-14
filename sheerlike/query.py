@@ -10,10 +10,10 @@ from django.conf import settings
 from django.utils.http import urlencode
 from django.core.urlresolvers import reverse
 
-import dateutil.parser
-
-from time import mktime, strptime
 import datetime
+from dateutil import parser
+from pytz import timezone
+from time import mktime, strptime
 
 import elasticsearch
 
@@ -65,7 +65,7 @@ def coerced_value(value, datatype):
         return value
 
     TYPE_MAP = {'string': unicode,
-                'date': dateutil.parser.parse,
+                'date': parser.parse,
                 'dict': dict,
                 'float': float,
                 'long': float,
@@ -102,7 +102,7 @@ class QueryHit(object):
         import sheerlike
         if self.type in sheerlike.PERMALINK_REGISTRY:
             pattern_name = sheerlike.PERMALINK_REGISTRY[self.type]
-            return reverse(pattern_name,kwargs=dict(doc_id=self._id))
+            return reverse(pattern_name, kwargs=dict(doc_id=self._id))
         else:
             raise NotImplementedError("Please use django's reverse url system,"
                                        "or register a permalink for %s" % self.type)
@@ -308,8 +308,9 @@ def more_like_this(hit, **kwargs):
 
     # this is bad and I should feel bad
     # (I do)
-    fake_query = FakeQuery(es,es_index)
-    return QueryResults(fake_query,raw_results)
+    fake_query = FakeQuery(es, es_index)
+    return QueryResults(fake_query, raw_results)
+
 
 def get_document(doctype, docid):
     es = elasticsearch.Elasticsearch(settings.SHEER_ELASTICSEARCH_SERVER)
@@ -317,3 +318,20 @@ def get_document(doctype, docid):
     raw_results = es.get(index=es_index, doc_type=doctype, id=docid)
     return QueryHit(raw_results, es, es_index)
 
+
+def convert_to_datetime(timestamp):
+    date = parser.parse(timestamp)
+    if not date.tzinfo:
+        date = date.replace(tzinfo=timezone('America/New_York'))
+    return date.astimezone(timezone('UTC'))
+
+
+def when(starttime, endtime):
+    start = convert_to_datetime(starttime)
+    end = convert_to_datetime(endtime)
+    if start >= datetime.datetime.now(timezone('UTC')):
+        return 'future'
+    elif end <= datetime.datetime.now(timezone('UTC')):
+        return 'past'
+    else:
+        return 'present'
