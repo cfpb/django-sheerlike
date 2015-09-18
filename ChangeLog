@@ -1,8 +1,10 @@
 CHANGES
 =======
 
-* Add jinja2 extension 'do'
-* Add dynamic RSS feeds
+* Fix the SheerlikeContext class from throwing errors when it expects a request object
+* Updates environment to include `when` for events detail page
+* Add jinja2 extension for the do blocks
+* Add dynamic RSS feed
 * Fix random test pass/fail result
 * Add some tests from sheer to sheerlike
 * git ignore fix via @kurtw

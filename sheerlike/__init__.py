@@ -38,7 +38,10 @@ def date_filter(value, format="%Y-%m-%d", tz="America/New_York"):
 class SheerlikeContext(Context):
     def __init__(self, environment, parent, name, blocks):
         super(SheerlikeContext, self).__init__(environment, parent, name, blocks)
-        self.vars['request'] = get_request()
+        try:
+            self.vars['request'] = get_request()
+        except:
+            pass
 
 # Monkey patch not needed in master version of Jinja2
 # https://github.com/mitsuhiko/jinja2/commit/f22fdd5ffe81aab743f78290071b0aa506705533
