@@ -79,7 +79,7 @@ def environment(**options):
         staticdirs.append(site_path.child('static'))
 
     options['loader'].searchpath += searchpath
-    settings.STATICFILES_DIRS = staticdirs
+    settings.STATICFILES_DIRS += staticdirs
 
     options.setdefault('extensions', []).append('jinja2.ext.do')
 
