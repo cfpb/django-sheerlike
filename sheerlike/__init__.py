@@ -31,10 +31,6 @@ def url_for(app, filename):
     else:
         raise ValueError("url_for doesn't know about %s" % app)
 
-def date_filter(value, format="%Y-%m-%d", tz="America/New_York"):
-            return date_formatter(value, format, tz)
-
-
 class SheerlikeContext(Context):
     def __init__(self, environment, parent, name, blocks):
         super(SheerlikeContext, self).__init__(environment, parent, name, blocks)
@@ -96,6 +92,6 @@ def environment(**options):
         'when': when
     })
     env.filters.update({
-        'date': date_filter
+        'date': date_formatter
     })
     return env
