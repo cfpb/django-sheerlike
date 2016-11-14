@@ -7,7 +7,9 @@ django-sheerlike
 This is an attempt to port some of our favorite
 `sheer <https://github.com/cfpb/sheer>`__ features over to Django.
 
-**Current status**: Not usable for any purpose.
+**Current status**: sheerlike now lives in the cfgov-refresh repo: https://github.com/cfpb/cfgov-refresh/
+
+There will be no further changes here.
 
 **Runs on**: Django 1.8 and Python 2.7
 
